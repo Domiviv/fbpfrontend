@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-lg-3">
+    <h2 class="my-3">Ferme de Blanche Pierre</h2>
+    <div class="list-group">
+      <a class="list-group-item" [routerLink]="['/home']">Produits</a>
+    </div>
+  </div>
+  <div class="col-lg-9 my-3">
+    <div class="row">
+      <div class="col-lg-4 col-md-6 mb-4" *ngFor="let item of items | sortBy: 'asc':'label'">
+        <div class="card h-100">
+          <img class="card-img-top" src="/assets/img/item{{item.idItem}}.jpg" alt="item{{item.idItem}}.jpg">
+          <div class="card-body">
+            <h5 class="card-title">{{item.label | titlecase}}</h5>
+          </div>
+          <div class="card-body align-items-end">
+            <h4 *ngIf="item.price">
+              <small>€</small>
+              {{item.price}}
+              <small *ngIf="item.qt" class="text-muted">/{{item.qt}}{{item.measure?.unit}}</small>
+            </h4>
+            <small *ngIf="!item.price" class="text-muted">Prix du jour (à demander sur place)</small>
+          </div>
+          <div class="card-footer text-center">
+            <button class="btn btn-outline-primary" [routerLink]="['/overview/'+item.idItem]">Détails</button>&nbsp;
+            <button class="btn btn-outline-success" *ngIf="!isAdmin">Ajouter au panier</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

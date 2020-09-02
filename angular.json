@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "FBPFrontend": {
+    "fbpfrontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -39,7 +39,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/FBPFrontend",
+            "outputPath": "dist/fbpfrontend",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,9 +50,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js",
+              "./node_modules/popper.js/dist/umd/popper.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -88,18 +93,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "FBPFrontend:build"
+            "browserTarget": "fbpfrontend:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "FBPFrontend:build:production"
+              "browserTarget": "fbpfrontend:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "FBPFrontend:build"
+            "browserTarget": "fbpfrontend:build"
           }
         },
         "test": {
@@ -136,15 +141,15 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "FBPFrontend:serve"
+            "devServerTarget": "fbpfrontend:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "FBPFrontend:serve:production"
+              "devServerTarget": "fbpfrontend:serve:production"
             }
           }
         }
       }
     }},
-  "defaultProject": "FBPFrontend"
+  "defaultProject": "fbpfrontend"
 }

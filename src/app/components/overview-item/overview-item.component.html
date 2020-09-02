@@ -1,0 +1,31 @@
+<div class="container mt-3">
+  <div class="media">
+    <img class="mr-4" src="assets/img/item{{item?.idItem}}.jpg" alt="{{item?.label}}">
+    <div class="media-body">
+      <h3 class="mt-0">{{item?.label | titlecase}}</h3>
+      <hr class="w-50">
+      <div class="row">
+        <span class="col-sm-12" *ngIf="item?.descr"><strong>Description : </strong></span>
+        <p class="col-sm-12">{{item?.descr | titlecase}}</p>
+
+        <span class="col-sm-12"><strong>Catégorie : </strong></span>
+        <p class="col-sm-12">En construction</p>
+
+        <span class="col-sm-12" *ngIf="item?.descr"><strong>Ce produit contient : </strong></span>
+        <ul class="col-sm-12 list-inline">
+          <li class="list-inline-item" *ngFor="let allergen of item.allergens">{{allergen?.label | titlecase}}</li>
+        </ul>
+
+        <span class="col-sm-12" *ngIf="item?.price"><strong>Prix : </strong></span>
+        <p class="col-sm-3" *ngIf="item?.price">€<strong class="display-4">{{item?.price}}</strong><span class="text-muted">/{{item?.qt}}{{item?.measure.unit}}</span></p>
+        <p class="col-sm-12" *ngIf="!item?.price">Prix du jour (à demander sur place)</p>
+
+        <p class="col-sm-9"></p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
