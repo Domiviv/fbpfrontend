@@ -27,13 +27,13 @@ export class AppComponent implements OnInit {
   }
   signOut(): void {
     this.tokenStorageService.signOut();
-    location.reload();
-    this.router.navigate(['home']);
+    this.router.navigate(['home']).then(() => location.reload());
   }
 
   onRemove(idItem): void{
     if (window.confirm('Êtes-vous sûr de vouloir retirer ce produit du panier?')){
       this.cartService.removeFromCart(idItem);
+      location.reload();
     }
   }
 

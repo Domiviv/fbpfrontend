@@ -50,14 +50,14 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.isLoggedIn = true;
       },
       error => {
-        this.errorMessage = error.error = 'invalid username or password';
+        this.errorMessage = error.error = 'Adresse email et/ou mot de passe invalide';
         this.isLoginFailed = true;
       }
     );
   }
 
   ngOnDestroy(): void {
-    this.loginSubscription.unsubscribe();
+    if (this.loginSubscription) { this.loginSubscription.unsubscribe(); }
   }
 
 }

@@ -55,7 +55,7 @@
                 </td>
               </tr>
             </table>
-            <div *ngIf="!this.cart.items" class="alert alert-danger" role="alert">
+            <div *ngIf="this.cart.items.length < 1" class="alert alert-danger" role="alert">
               Votre panier est vide!
             </div>
           </div>

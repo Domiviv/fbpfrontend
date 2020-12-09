@@ -4,7 +4,7 @@ import { ItemService } from '../../services/item.service';
 import { Subscription } from 'rxjs';
 import { Item } from '../../models/Item.model';
 import {TokenStorageService} from '../../services/auth/token-storage.service';
-// import {CartService} from '../../services/cart.service';
+import {CartService} from '../../services/cart.service';
 
 @Component({
   selector: 'app-home-items',
@@ -18,12 +18,11 @@ export class HomeItemsComponent implements OnInit, OnDestroy {
   items: Item[];
   cartItem = new Item();
   itemSubscription: Subscription;
-  // cartSubscription: Subscription;
+  cartSubscription: Subscription;
 
   constructor(private itemService: ItemService,
-              private tokenStorageService: TokenStorageService
-              // ,
-              // private cartService: CartService
+              private tokenStorageService: TokenStorageService,
+              private cartService: CartService
   ) { }
 
   ngOnInit(): void {
@@ -39,19 +38,20 @@ export class HomeItemsComponent implements OnInit, OnDestroy {
     );
   }
 
-  // onAdd(idItem): void {
-  //   if (this.isCustomer) {
-  //     this.cartSubscription = this.itemService.getItemById(idItem).subscribe(
-  //       (item) => this.cartService.addToCart(item)
-  //       );
-  //   }
-  //   else {
-  //     alert('Veuillez vous inscrire ou vous connecter pour reserver');
-  //   }
-  // }
+  onAdd(idItem): void {
+    if (this.isCustomer) {
+      this.cartSubscription = this.itemService.getItemById(idItem).subscribe(
+        (item) => this.cartService.addToCart(item)
+        );
+      location.reload();
+    }
+    else {
+      alert('Veuillez vous inscrire ou vous connecter pour reserver');
+    }
+  }
 
   ngOnDestroy(): void {
-    this.itemSubscription.unsubscribe();
-    // this.cartSubscription.unsubscribe();
+    if (this.itemSubscription) { this.itemSubscription.unsubscribe(); }
+    if (this.cartSubscription) { this.cartSubscription.unsubscribe(); }
   }
 }
