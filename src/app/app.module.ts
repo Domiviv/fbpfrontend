@@ -64,7 +64,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     NgpSortModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' })
   ],
   providers: [
     AnonymousGuardService,
