@@ -21,6 +21,9 @@ import { AnonymousGuardService } from './services/guard/anonymous-guard.service'
 import { ManageItemsComponent } from './components/dashboard/manage-items/manage-items.component';
 import { OverviewItemComponent } from './components/overview-item/overview-item.component';
 import { MeasureService } from './services/measure.service';
+import { ManageCustomersComponent } from './dashboard/manage-customers/manage-customers.component';
+import { ManageNewsComponent } from './dashboard/manage-news/manage-news.component';
+import { CartService } from './services/cart.service';
 
 
 
@@ -51,7 +54,9 @@ const appRoutes: Routes = [
     LoginComponent,
     RegisterComponent,
     ManageItemsComponent,
-    OverviewItemComponent
+    OverviewItemComponent,
+    ManageCustomersComponent,
+    ManageNewsComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +71,7 @@ const appRoutes: Routes = [
     AuthGuardService,
     AuthenticationService,
     authInterceptorProviders,
+    CartService,
     ItemService,
     MeasureService,
     RoleService,

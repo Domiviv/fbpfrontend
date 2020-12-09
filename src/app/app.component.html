@@ -26,9 +26,55 @@
         </div>
       </li>
     </ul>
-    <button class="btn btn-outline-success" style="margin-right: 10px" [routerLink]="['/login']" *ngIf="!isLoggedIn">Se connecter</button>
-    <button class="btn btn-outline-primary" [routerLink]="['/register']" *ngIf="!isLoggedIn">S'inscrire</button>
-    <button class="btn btn-outline-primary" (click)="signOut()" *ngIf="isLoggedIn">Se déconnecter</button>
+    <button class="btn">
+      <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-cart4" fill="currentColor" xmlns="http://www.w3.org/2000/svg"  data-toggle="modal" data-target="#exampleModal">
+        <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+      </svg>
+    </button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Panier</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table *ngIf="this.cart.items">
+              <tr *ngFor="let item of this.cart.items">
+                <ng-container *ngIf="item.price">
+                  <td>{{ item.label | titlecase }} {{item.qt}}{{item.measure.unit}}</td>
+                </ng-container>
+                <td>
+                  <svg (click)="onRemove(item.idItem)" width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bag-x ml-2 text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z"/>
+                    <path fill-rule="evenodd" d="M6.146 8.146a.5.5 0 0 1 .708 0L8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 0 1 0-.708z"/>
+                  </svg>
+                </td>
+              </tr>
+            </table>
+            <div *ngIf="!this.cart.items" class="alert alert-danger" role="alert">
+              Votre panier est vide!
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            <button type="button" class="btn btn-primary" (click)="onOrder()">Commander</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button *ngIf="isCustomer" class="btn">
+      <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+      </svg>
+    </button>
+    <button class="btn btn-outline-dark" style="margin-right: 10px" [routerLink]="['/login']" *ngIf="!isLoggedIn">Se connecter</button>
+    <button class="btn btn-outline-dark" [routerLink]="['/register']" *ngIf="!isLoggedIn">S'inscrire</button>
+    <button class="btn btn-outline-dark" (click)="signOut()" *ngIf="isLoggedIn">Se déconnecter</button>
   </div>
 </nav>
 

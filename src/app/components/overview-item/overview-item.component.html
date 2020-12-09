@@ -3,7 +3,7 @@
     <img class="mr-4" src="assets/img/item{{item?.idItem}}.jpg" alt="{{item?.label}}">
     <div class="media-body">
       <h3 class="mt-0">{{item?.label | titlecase}}</h3>
-      <hr class="w-50">
+      <hr>
       <div class="row">
         <span class="col-sm-12" *ngIf="item?.descr"><strong>Description : </strong></span>
         <p class="col-sm-12">{{item?.descr | titlecase}}</p>
@@ -20,7 +20,14 @@
         <p class="col-sm-3" *ngIf="item?.price">€<strong class="display-4">{{item?.price}}</strong><span class="text-muted">/{{item?.qt}}{{item?.measure.unit}}</span></p>
         <p class="col-sm-12" *ngIf="!item?.price">Prix du jour (à demander sur place)</p>
 
-        <p class="col-sm-9"></p>
+        <p class="col-sm-12" *ngIf="!isAdmin && item?.price">
+          <button type="button" class="btn btn-fbpyellow">
+            Ajouter au panier
+            <svg width="1.25em" height="1.25em" viewBox="0 0 16 16" class="bi bi-cart-plus-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM4 14a1 1 0 1 1 2 0 1 1 0 0 1-2 0zm7 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"></path>
+            </svg>
+          </button>
+        </p>
 
       </div>
     </div>
