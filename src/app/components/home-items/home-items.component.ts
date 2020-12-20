@@ -41,9 +41,11 @@ export class HomeItemsComponent implements OnInit, OnDestroy {
   onAdd(idItem): void {
     if (this.isCustomer) {
       this.cartSubscription = this.itemService.getItemById(idItem).subscribe(
-        (item) => this.cartService.addToCart(item)
-        );
-      location.reload();
+        (item) => {
+          this.cartService.addToCart(item);
+          location.reload();
+        }
+      );
     }
     else {
       alert('Veuillez vous inscrire ou vous connecter pour reserver');

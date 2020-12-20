@@ -1,0 +1,23 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">id</th>
+    <th scope="col">Client</th>
+    <th scope="col">Email</th>
+    <th scope="col">Adresse</th>
+    <th scope="col">Rôle</th>
+    <th scope="col">Newsletter ?</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users | sortBy: 'asc':'idUser'">
+    <td style="width: 2%">{{user.idUser}}</td>
+    <td style="width: 28%">{{user.firstName | titlecase}} {{user.lastName | uppercase}}</td>
+    <td style="width: 20%">{{user.email}}</td>
+    <td style="width: 20%">{{user.address | titlecase}}<br>{{user.address2}}</td>
+    <td style="width: 15%">{{user.role.label | titlecase}}</td>
+    <td style="width: 15%" *ngIf="user.newsletter">Oui</td>
+    <td style="width: 15%" *ngIf="!user.newsletter">Non</td>
+  </tr>
+  </tbody>
+</table>

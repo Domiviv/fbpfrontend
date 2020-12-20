@@ -12,8 +12,9 @@
         <p class="col-sm-12">En construction</p>
 
         <span class="col-sm-12" *ngIf="item?.descr"><strong>Ce produit contient : </strong></span>
+
         <ul class="col-sm-12 list-inline">
-          <li class="list-inline-item" *ngFor="let allergen of item.allergens">{{allergen?.label | titlecase}}</li>
+          <li class="list-inline-item" *ngFor="let allergen of item.allergens"><span class="badge badge-light">{{allergen?.label | titlecase}}</span></li>
         </ul>
 
         <span class="col-sm-12" *ngIf="item?.price"><strong>Prix : </strong></span>

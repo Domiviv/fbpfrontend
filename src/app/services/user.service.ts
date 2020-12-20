@@ -14,4 +14,8 @@ export class UserService {
   newCustomer(newUser: User): Observable<User> {
     return this.httpClient.post<User>(API_URL + 'user/customer/add', newUser, HTTP_OPTIONS);
   }
+
+  getAllUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(API_URL + 'user/all', HTTP_OPTIONS);
+  }
 }

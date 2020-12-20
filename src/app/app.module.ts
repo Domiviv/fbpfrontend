@@ -21,9 +21,13 @@ import { AnonymousGuardService } from './services/guard/anonymous-guard.service'
 import { ManageItemsComponent } from './components/dashboard/manage-items/manage-items.component';
 import { OverviewItemComponent } from './components/overview-item/overview-item.component';
 import { MeasureService } from './services/measure.service';
-import { ManageCustomersComponent } from './dashboard/manage-customers/manage-customers.component';
-import { ManageNewsComponent } from './dashboard/manage-news/manage-news.component';
+import { ManageCustomersComponent } from './components/dashboard/manage-customers/manage-customers.component';
+import { ManageNewsComponent } from './components/dashboard/manage-news/manage-news.component';
 import { CartService } from './services/cart.service';
+import { AddItemComponent } from './components/dashboard/add-item/add-item.component';
+import { ManageOrdersComponent } from './components/dashboard/manage-orders/manage-orders.component';
+import {AllergenService} from './services/allergen.service';
+import { EditItemComponent } from './components/dashboard/edit-item/edit-item.component';
 
 
 
@@ -31,11 +35,52 @@ import { CartService } from './services/cart.service';
 const appRoutes: Routes = [
   { path: 'overview/:id', component: OverviewItemComponent},
   {
+    path: 'dashboard/edit-item/:id',
+    canActivate: [RoleGuardService],
+    component: EditItemComponent,
+    data : {
+      expectedRole: ['ROLE_ADMINISTRATEUR']
+    }
+  },
+  {
     path: 'dashboard/items',
     canActivate: [RoleGuardService],
     component: ManageItemsComponent,
     data : {
         expectedRole: ['ROLE_ADMINISTRATEUR']
+    }
+  },
+  {
+    path: 'dashboard/items/add',
+    canActivate: [RoleGuardService],
+    component: AddItemComponent,
+    data : {
+      expectedRole: ['ROLE_ADMINISTRATEUR']
+    }
+  },
+  {
+    path: 'dashboard/news',
+    canActivate: [RoleGuardService],
+    component: ManageNewsComponent,
+    data : {
+      expectedRole: ['ROLE_ADMINISTRATEUR']
+    }
+  },
+  {
+    path: 'dashboard/customers',
+    canActivate: [RoleGuardService],
+    component: ManageCustomersComponent,
+    data : {
+      expectedRole: ['ROLE_ADMINISTRATEUR']
+    }
+  },
+
+  {
+    path: 'dashboard/orders',
+    canActivate: [RoleGuardService],
+    component: ManageOrdersComponent,
+    data : {
+      expectedRole: ['ROLE_ADMINISTRATEUR']
     }
   },
   { path: 'register', canActivate: [AnonymousGuardService], component: RegisterComponent },
@@ -56,7 +101,10 @@ const appRoutes: Routes = [
     ManageItemsComponent,
     OverviewItemComponent,
     ManageCustomersComponent,
-    ManageNewsComponent
+    ManageNewsComponent,
+    AddItemComponent,
+    ManageOrdersComponent,
+    EditItemComponent
   ],
   imports: [
     BrowserModule,
@@ -67,6 +115,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' })
   ],
   providers: [
+    AllergenService,
     AnonymousGuardService,
     AuthGuardService,
     AuthenticationService,

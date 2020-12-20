@@ -17,9 +17,9 @@
           Gestion
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item disabled" >Actualités</a>
-          <a class="dropdown-item disabled" >Clients</a>
-          <a class="dropdown-item disabled" >Commandes</a>
+          <a class="dropdown-item" [routerLink]="['/dashboard/news']">Actualités</a>
+          <a class="dropdown-item" [routerLink]="['/dashboard/customers']">Clients</a>
+          <a class="dropdown-item" [routerLink]="['/dashboard/orders']" >Commandes</a>
           <a class="dropdown-item" [routerLink]="['/dashboard/items']" >Produits</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" >Something else here</a>
@@ -48,7 +48,7 @@
                   <td>{{ item.label | titlecase }} {{item.qt}}{{item.measure.unit}}</td>
                 </ng-container>
                 <td>
-                  <svg (click)="onRemove(item.idItem)" width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bag-x ml-2 text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <svg (click)="onRemove(item.idItem)" style="cursor: pointer" width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bag-x ml-2 text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z"/>
                     <path fill-rule="evenodd" d="M6.146 8.146a.5.5 0 0 1 .708 0L8 9.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 10l1.147 1.146a.5.5 0 0 1-.708.708L8 10.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 10 6.146 8.854a.5.5 0 0 1 0-.708z"/>
                   </svg>

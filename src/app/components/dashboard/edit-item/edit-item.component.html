@@ -1,0 +1,41 @@
+<article class="card-body mx-auto" style="max-width: 400px;">
+  <h4 class="card-title mt-3 text-center">Editer le produit : {{item.label}}</h4>
+  <form [formGroup]="editItemForm" data-children-count="10" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="label">Titre</label>
+      <input class="form-control" id="label" formControlName="label" type="text" [ngClass]="{ 'is-invalid': submitted && f.label.errors }">
+      <div *ngIf="submitted && f.label.errors" class="invalid-feedback">
+        <div *ngIf="f.label.errors.required">Veuillez entrer un titre</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="price">Prix</label>
+      <input name="" class="form-control" id="price" formControlName="price" type="number">
+    </div>
+    <div class="form-group">
+      <label for="descr">Description</label>
+      <textarea rows="4" name="" class="form-control" id="descr" formControlName="descr" type="text"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="qt">Quantité</label>
+      <input name="" class="form-control" id="qt" formControlName="qt" type="number">
+    </div>
+
+    <div class="form-group">
+      <label for="measureSelect">Mesure (valeur actuelle : {{this.item.measure.label}})</label>
+      <select id="measureSelect" class="form-control" formControlName="measure" [ngClass]="{ 'is-invalid': submitted && f.measure.errors }">
+        <option [ngValue]="null" disabled>Choisissez une unité de mesure</option>
+        <option *ngFor="let measure of measures | sortBy: 'asc':'label'" [ngValue]="measure" class="form-control" id="measure">{{measure.label}}</option>
+      </select>
+      <div *ngIf="submitted && f.measure.errors" class="invalid-feedback">
+        <div *ngIf="f.measure.errors.required">Veuillez entrer une unité de mesure</div>
+      </div>
+      <p class="text-muted"><i>Laisser vide pour conserver la valeur</i></p>
+    </div>
+
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-block" >Editer le produit</button>
+    </div>
+  </form>
+</article>
