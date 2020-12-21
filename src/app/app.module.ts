@@ -28,6 +28,7 @@ import { AddItemComponent } from './components/dashboard/add-item/add-item.compo
 import { ManageOrdersComponent } from './components/dashboard/manage-orders/manage-orders.component';
 import {AllergenService} from './services/allergen.service';
 import { EditItemComponent } from './components/dashboard/edit-item/edit-item.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 
 
 
@@ -83,6 +84,14 @@ const appRoutes: Routes = [
       expectedRole: ['ROLE_ADMINISTRATEUR']
     }
   },
+  {
+    path: 'my-orders',
+    canActivate: [RoleGuardService],
+    component: MyOrdersComponent,
+    data : {
+      expectedRole: ['ROLE_CLIENT']
+    }
+  },
   { path: 'register', canActivate: [AnonymousGuardService], component: RegisterComponent },
   { path: 'login', canActivate: [AnonymousGuardService], component: LoginComponent },
   { path: 'home', component: HomeItemsComponent },
@@ -104,7 +113,8 @@ const appRoutes: Routes = [
     ManageNewsComponent,
     AddItemComponent,
     ManageOrdersComponent,
-    EditItemComponent
+    EditItemComponent,
+    MyOrdersComponent
   ],
   imports: [
     BrowserModule,

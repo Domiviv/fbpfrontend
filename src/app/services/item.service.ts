@@ -27,7 +27,6 @@ export class ItemService {
   }
 
   updateItem(newItem: Item): Observable<Item> {
-    console.log(newItem.idItem);
     return this.httpClient.put<Item>(API_URL + 'item/update/' + newItem.idItem , newItem, HTTP_OPTIONS);
   }
 

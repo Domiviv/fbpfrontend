@@ -9,7 +9,7 @@
         <a class="nav-link" >Actualités</a>
       </li>
       <li class="nav-item disabled">
-        <a class="nav-link" *ngIf="isCustomer">Mes commandes</a>
+        <a class="nav-link" *ngIf="isCustomer" [routerLink]="['/my-orders']">Mes commandes</a>
       </li>
 
       <li class="nav-item dropdown" *ngIf="isAdmin">

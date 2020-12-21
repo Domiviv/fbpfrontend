@@ -1,17 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Item} from '../../../models/Item.model';
-import {Order} from '../../../models/Order.model';
+import {Item} from '../../models/Item.model';
 import {Subscription} from 'rxjs';
-import {ItemService} from '../../../services/item.service';
-import {OrderService} from '../../../services/order.service';
+import {ItemService} from '../../services/item.service';
+import {Order} from '../../models/Order.model';
+import {OrderService} from '../../services/order.service';
 
 @Component({
-  selector: 'app-manage-orders',
-  templateUrl: './manage-orders.component.html',
-  styleUrls: ['./manage-orders.component.scss']
+  selector: 'app-my-orders',
+  templateUrl: './my-orders.component.html',
+  styleUrls: ['./my-orders.component.scss']
 })
-export class ManageOrdersComponent implements OnInit, OnDestroy {
-
+export class MyOrdersComponent implements OnInit, OnDestroy {
 
   items: Item[];
   orders: Order[];
@@ -48,8 +47,8 @@ export class ManageOrdersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.itemSubscription) { this.itemSubscription.unsubscribe(); }
-    if (this.orderSubscription) { this.orderSubscription.unsubscribe(); }
+   if (this.itemSubscription) { this.itemSubscription.unsubscribe(); }
+   if (this.orderSubscription) { this.orderSubscription.unsubscribe(); }
   }
 
 }
