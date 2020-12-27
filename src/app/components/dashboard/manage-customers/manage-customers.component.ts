@@ -17,7 +17,7 @@ export class ManageCustomersComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
-    this.userSubscription = this.userService.getAllUsers().subscribe(
+    this.userSubscription = this.userService.getAllCustomers().subscribe(
       (users: User[]) => {
         this.users = users;
         console.log(this.users);

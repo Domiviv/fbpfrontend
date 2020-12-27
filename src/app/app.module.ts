@@ -29,6 +29,8 @@ import { ManageOrdersComponent } from './components/dashboard/manage-orders/mana
 import {AllergenService} from './services/allergen.service';
 import { EditItemComponent } from './components/dashboard/edit-item/edit-item.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { PurchaseComponent } from './components/purchase/purchase.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -92,6 +94,14 @@ const appRoutes: Routes = [
       expectedRole: ['ROLE_CLIENT']
     }
   },
+  {
+    path: 'purchase',
+    canActivate: [RoleGuardService],
+    component: PurchaseComponent,
+    data : {
+      expectedRole: ['ROLE_CLIENT']
+    }
+  },
   { path: 'register', canActivate: [AnonymousGuardService], component: RegisterComponent },
   { path: 'login', canActivate: [AnonymousGuardService], component: LoginComponent },
   { path: 'home', component: HomeItemsComponent },
@@ -114,7 +124,8 @@ const appRoutes: Routes = [
     AddItemComponent,
     ManageOrdersComponent,
     EditItemComponent,
-    MyOrdersComponent
+    MyOrdersComponent,
+    PurchaseComponent
   ],
   imports: [
     BrowserModule,
@@ -122,7 +133,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     NgpSortModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' })
+    RouterModule.forRoot(appRoutes, { relativeLinkResolution: 'legacy' }),
+    NgbModule
   ],
   providers: [
     AllergenService,

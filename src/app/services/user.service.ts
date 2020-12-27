@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {API_URL, HTTP_OPTIONS} from '../app.constants';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {User} from '../models/User.model';
 
 @Injectable({
@@ -17,5 +17,14 @@ export class UserService {
 
   getAllUsers(): Observable<User[]> {
     return this.httpClient.get<User[]>(API_URL + 'user/all', HTTP_OPTIONS);
+  }
+
+  getAllCustomers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(API_URL + 'user/customers', HTTP_OPTIONS);
+  }
+
+  getUserByEmail(email: string): Observable<User> {
+    const params = new HttpParams().set('email', email);
+    return this.httpClient.get<User>(API_URL + 'user/connected', {params});
   }
 }

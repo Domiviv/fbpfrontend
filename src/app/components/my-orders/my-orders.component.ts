@@ -4,6 +4,11 @@ import {Subscription} from 'rxjs';
 import {ItemService} from '../../services/item.service';
 import {Order} from '../../models/Order.model';
 import {OrderService} from '../../services/order.service';
+import {TokenStorageService} from '../../services/auth/token-storage.service';
+import {User} from '../../models/User.model';
+import {SoldItem} from '../../models/SoldItem.model';
+import {SoldItemService} from '../../services/soldItem.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-my-orders',
@@ -14,13 +19,21 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
 
   items: Item[];
   orders: Order[];
+  soldItems: SoldItem[];
+  user: User;
+  order: Order;
+  soldItemSubscription: Subscription;
   itemSubscription: Subscription;
   orderSubscription: Subscription;
 
   constructor(private itemService: ItemService,
-              private orderService: OrderService) { }
+              private orderService: OrderService,
+              private tokenStorageService: TokenStorageService,
+              private soldItemService: SoldItemService,
+              private modalService: NgbModal) { }
 
   ngOnInit(): void {
+
     this.itemSubscription = this.itemService.getAllItems().subscribe(
       (items: Item[]) => {
         this.items = items;
@@ -29,7 +42,7 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.orderSubscription = this.orderService.getAllOrders().subscribe(
+    this.orderSubscription = this.orderService.getOrdersByUserEmail(this.tokenStorageService.getUser()).subscribe(
       (orders: Order[]) => {
         this.orders = orders;
         console.log(orders);
@@ -37,6 +50,20 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
         console.log(error);
       }
     );
+
+    // this.soldItemSubscription = this.soldItemService.getAllSoldItems().subscribe(
+    //   (soldItems: SoldItem[]) => {
+    //     this.soldItems = soldItems;
+    //     console.log(soldItems);
+    //   }, error => {
+    //     console.log(error);
+    //   }
+    // );
+  }
+
+  onClick(orderModal, order: Order): void {
+    this.order = order;
+    this.modalService.open(orderModal, {scrollable: true, centered: true});
   }
 
   onCancel(id: number): void {

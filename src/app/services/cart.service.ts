@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Item } from '../models/Item.model';
 import { Cart } from '../models/Cart.model';
+import {User} from '../models/User.model';
+import {Stock} from '../models/Stock.model';
 
-const USER_CART = 'user-cart';
+
 
 @Injectable({
   providedIn: 'root'
@@ -10,41 +11,52 @@ const USER_CART = 'user-cart';
 export class CartService {
 
   private cart = new Cart();
-
+  userEmail: string;
+  user: User;
   constructor() { }
 
-  public removeCart(): void {
+  public removeCart(id: string): void {
     localStorage.clear();
   }
 
-  public addToCart(item: Item): void {
-    this.cart.items = [];
-    if (this.getCart() !== null) {
-      this.cart.items = this.getCart();
-      this.cart.items.push(item);
-      localStorage.setItem(USER_CART, JSON.stringify(this.cart.items));
+  public addToCart(stock: Stock, id: string): void {
+    this.cart.stocks = [];
+    if (this.getCart(id) !== null) {
+      this.cart.stocks = this.getCart(id);
+      this.cart.stocks.push(stock);
+      localStorage.setItem(id, JSON.stringify(this.cart.stocks));
       alert('Produit ajouté au panier !');
     }
     else {
-      this.cart.items.push(item);
-      localStorage.setItem(USER_CART, JSON.stringify(this.cart.items));
+      this.cart.stocks.push(stock);
+      localStorage.setItem(id, JSON.stringify(this.cart.stocks));
       alert('Produit ajouté au panier !');
     }
 
 
   }
-  public getCart(): Item[] {
-    return JSON.parse(localStorage.getItem(USER_CART));
+  public getCart(id: string): Stock[] {
+    return JSON.parse(localStorage.getItem(id));
   }
 
-  public removeFromCart(idItem): void {
-    this.cart.items = [];
-    this.cart.items = this.getCart();
-    const index: number = this.cart.items.indexOf(this.cart.items.find(item => item.idItem === idItem));
+  public ifExistInCart(idStock: number, idUser: string): boolean{
+    this.cart.stocks = [];
+    this.cart.stocks = this.getCart(idUser);
+    const index: number = this.cart.stocks.indexOf(this.cart.stocks.find(stock => stock.idStock === idStock));
     if ( index !== -1){
-      this.cart.items.splice(index, 1);
+      return true;
     }
-    localStorage.setItem(USER_CART, JSON.stringify(this.cart.items));
+    return false;
+  }
+
+  public removeFromCart(idStock: number, id: string): void {
+    this.cart.stocks = [];
+    this.cart.stocks = this.getCart(id);
+    const index: number = this.cart.stocks.indexOf(this.cart.stocks.find(stock => stock.idStock === idStock));
+    if ( index !== -1){
+      this.cart.stocks.splice(index, 1);
+    }
+    localStorage.setItem(id, JSON.stringify(this.cart.stocks));
   }
 
 }

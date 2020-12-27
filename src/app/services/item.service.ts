@@ -39,4 +39,5 @@ export class ItemService {
     this.httpClient.delete(API_URL + 'item/delete/' + id, HTTP_OPTIONS).subscribe();
     return true;
   }
+
 }

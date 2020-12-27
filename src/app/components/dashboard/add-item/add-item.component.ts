@@ -80,15 +80,14 @@ export class AddItemComponent implements OnInit, OnDestroy {
     if (this.addItemForm.invalid) {
       return;
     }
-
     this.newItem.label = this.addItemForm.value.label;
     this.newItem.price = this.addItemForm.value.price;
     this.newItem.descr = this.addItemForm.value.descr;
     this.newItem.qt = this.addItemForm.value.qt;
     this.newItem.measure = this.addItemForm.value.measure;
-    this.allergensList = this.addItemForm.value.allergens;
+    this.newItem.allergens = this.addItemForm.value.allergens;
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.newItem, null, 4));
-    console.log(this.allergensList);
+    console.log(this.addItemForm.value.allergens);
 
     this.itemSubscription = this.itemService.newItem(this.newItem).subscribe(
       () => {
@@ -97,32 +96,6 @@ export class AddItemComponent implements OnInit, OnDestroy {
         this.router.navigate(['dashboard/items']);
       }
     );
-
-    // this.itemSubscription = this.itemService.newItem(this.newItem).subscribe(
-    //   (item: Item) => {
-    //     this.item = item;
-    //     console.log('test : ' + item.idItem);
-    //     // tslint:disable-next-line:max-line-length
-    // tslint:disable-next-line:max-line-length
-    //     alert('Félicitation, un nouveau produit a été ajouté.\n\nVous serez redirigé vers la liste des produits après avoir cliqué sur "Ok"');
-    //     // this.router.navigate(['login']);
-    //   }
-    // );
-
-    // // tslint:disable-next-line:prefer-for-of
-    // for (let i = 0; i < this.allergensList.length; i++) {
-    //   this.iC.idAllergen = Number(this.allergensList[i]);
-    //   this.iC.idItem = this.newItem.idItem;
-    //
-    //   alert(JSON.stringify(this.iC, null, 4));
-    //   this.itemContainsSubscription = this.itemService.newItemContains(this.iC).subscribe(
-    //     () => {
-    //       // tslint:disable-next-line:max-line-length
-    //       alert('Félicitation, les allergenes ajouté.\n\nVous serez redirigé vers la liste des produits après avoir cliqué sur "Ok"');
-    //       // this.router.navigate(['login']);
-    //     }
-    //   );
-    // }
   }
 
   ngOnDestroy(): void {
@@ -134,29 +107,16 @@ export class AddItemComponent implements OnInit, OnDestroy {
     // this.itemContainsSubscription.unsubscribe();
   }
 
-  onCheckChange(event): void {
-    const formArray: FormArray = this.addItemForm.get('allergens') as FormArray;
-
-    /* Selected */
-    if (event.target.checked) {
-      // Add a new control in the arrayForm
-      formArray.push(new FormControl(event.target.value));
+  onCheckChange(allergen): void {
+    const index: number = this.addItemForm.value.allergens.indexOf(
+      this.addItemForm.value.allergens.find(a => a.idAllergen === allergen.idAllergen
+      ));
+    if ( index !== -1){
+      this.addItemForm.value.allergens.splice(index, 1);
     }
-    /* unselected */
     else {
-      // find the unselected element
-      let i = 0;
-
-      formArray.controls.forEach((ctrl: FormControl) => {
-        // tslint:disable-next-line:triple-equals
-        if (ctrl.value == event.target.value) {
-          // Remove the unselected element from the arrayForm
-          formArray.removeAt(i);
-          return;
-        }
-        i++;
-      });
+      this.addItemForm.value.allergens.push(allergen);
     }
-
+    console.log(this.addItemForm.value.allergens);
   }
 }

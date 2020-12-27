@@ -35,7 +35,7 @@
 
     <div *ngFor="let allergen of allergens | sortBy: 'asc':'label'" class="m-checkbox-list">
       <label for="allergen_{{allergen.idAllergen}}" class="m-checkbox" >
-        <input id="allergen_{{allergen.idAllergen}}" type="checkbox" name="allergen_{{allergen.idAllergen}}" [value]="allergen.idAllergen" (change)="onCheckChange($event)">
+        <input id="allergen_{{allergen.idAllergen}}" type="checkbox" name="allergen_{{allergen.idAllergen}}" [value]="allergen" (click)="onCheckChange(allergen)">
         {{allergen.label}}
       </label>
     </div>

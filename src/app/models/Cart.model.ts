@@ -1,8 +1,11 @@
-import {Item} from './Item.model';
+import {User} from './User.model';
+import {Observable} from 'rxjs';
+import {Stock} from './Stock.model';
 
 export class Cart {
 
-  items: Item[];
+  user: User;
+  stocks: Stock[];
 
   constructor() {}
 }
