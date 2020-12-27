@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {API_URL, HTTP_OPTIONS} from '../app.constants';
 import {Order} from '../models/Order.model';
-import {User} from '../models/User.model';
-import {Item} from '../models/Item.model';
 import {Stock} from '../models/Stock.model';
 
 @Injectable({

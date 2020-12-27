@@ -1,4 +1,3 @@
-
 export class Measure {
   idMeasure: number;
   label: string;

@@ -37,7 +37,8 @@ export class EditItemComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private measureService: MeasureService,
               private allergenService: AllergenService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
 
@@ -62,7 +63,7 @@ export class EditItemComponent implements OnInit, OnDestroy {
     );
   }
 
-  onSubmit(): void{
+  onSubmit(): void {
 
     this.submitted = true;
 
@@ -105,9 +106,15 @@ export class EditItemComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.routeSubscription.unsubscribe();
-    this.itemSubscription.unsubscribe();
-    this.measureSubscription.unsubscribe();
+    if (this.routeSubscription) {
+      this.routeSubscription.unsubscribe();
+    }
+    if (this.itemSubscription) {
+      this.itemSubscription.unsubscribe();
+    }
+    if (this.measureSubscription) {
+      this.measureSubscription.unsubscribe();
+    }
   }
 
 }

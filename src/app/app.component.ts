@@ -25,12 +25,13 @@ export class AppComponent implements OnInit {
               private cartService: CartService,
               private userService: UserService) {
   }
+
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     this.isAdmin = this.tokenStorageService.getRole() === 'ROLE_ADMINISTRATEUR';
     this.isCustomer = this.tokenStorageService.getRole() === 'ROLE_CLIENT';
 
-    if (this.tokenStorageService.getUser()){
+    if (this.tokenStorageService.getUser()) {
       this.userSubscription = this.userService.getUserByEmail(this.tokenStorageService.getUser()).subscribe(
         (user: User) => {
           this.user = user;
@@ -39,25 +40,25 @@ export class AppComponent implements OnInit {
           console.log(error);
         }
       );
-    }
-    else{
+    } else {
       this.cart.stocks = this.cartService.getCart('unknown');
     }
 
   }
+
   signOut(): void {
     this.tokenStorageService.signOut();
     this.router.navigate(['home']).then(() => location.reload());
   }
 
-  onRemove(idStock): void{
-    if (window.confirm('Êtes-vous sûr de vouloir retirer ce produit du panier?')){
+  onRemove(idStock): void {
+    if (window.confirm('Êtes-vous sûr de vouloir retirer ce produit du panier?')) {
       this.cartService.removeFromCart(idStock, this.user.idUser.toString());
       location.reload();
     }
   }
 
-  onOrder(): void{
+  onOrder(): void {
     this.router.navigate(['/purchase']);
   }
 

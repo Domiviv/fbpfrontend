@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Item} from '../models/Item.model';
 import {API_URL} from '../app.constants';
 import {Stock} from '../models/Stock.model';
 import {HttpClient} from '@angular/common/http';
@@ -10,9 +9,10 @@ import {HttpClient} from '@angular/common/http';
 })
 export class StockService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
-  getStockItemByItemId(idItem: number): Observable<Stock>{
+  getStockItemByItemId(idItem: number): Observable<Stock> {
     return this.httpClient.get<Stock>(API_URL + 'stock/item/' + idItem);
   }
 }

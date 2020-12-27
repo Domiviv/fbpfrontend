@@ -8,5 +8,7 @@
   border-color: #4F4F4F;
 }
 
+.custom-title:first-letter {text-transform: uppercase}
+
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';

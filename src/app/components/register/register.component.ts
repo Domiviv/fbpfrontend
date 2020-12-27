@@ -21,7 +21,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -36,7 +37,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
       number: ['', Validators.required],
       postcode: ['', Validators.required],
       city: ['', Validators.required],
-      newsletter: [''],
       pwd: ['', [Validators.required, Validators.minLength(this.pwdMinLength)]],
       pwdconf: ['', Validators.required]
     }, {
@@ -46,7 +46,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
 
   // convenience getter for easy access to form fields
   // tslint:disable-next-line:typedef
-  get f() { return this.registerForm.controls; }
+  get f() {
+    return this.registerForm.controls;
+  }
 
   onSubmit(): void {
     this.submitted = true;
@@ -62,7 +64,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.newUser.address = this.registerForm.value.address + ', ' + this.registerForm.value.number;
     this.newUser.address2 = this.registerForm.value.postcode + ', ' + this.registerForm.value.city;
     this.newUser.pwd = this.registerForm.value.pwd;
-    this.newUser.newsletter = this.registerForm.value.newsletter;
 
     this.userSubscription = this.userService.newCustomer(this.newUser).subscribe(
       () => {
@@ -74,6 +75,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.userSubscription) { this.userSubscription.unsubscribe(); }
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 }

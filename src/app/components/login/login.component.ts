@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../services/auth/authentication.service';
-import { TokenStorageService } from '../../services/auth/token-storage.service';
-import { Subscription } from 'rxjs';
+import {Router} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {AuthenticationService} from '../../services/auth/authentication.service';
+import {TokenStorageService} from '../../services/auth/token-storage.service';
+import {Subscription} from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
 
 @Component({
@@ -22,11 +22,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
               private formBuilder: FormBuilder,
               private authenticationService: AuthenticationService,
-              private tokenStorageService: TokenStorageService) { }
+              private tokenStorageService: TokenStorageService) {
+  }
 
   ngOnInit(): void {
     this.initForm();
-    if (this.tokenStorageService.getToken()){ this.isLoggedIn = true; }
+    if (this.tokenStorageService.getToken()) {
+      this.isLoggedIn = true;
+    }
   }
 
   initForm(): void {
@@ -57,7 +60,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.loginSubscription) { this.loginSubscription.unsubscribe(); }
+    if (this.loginSubscription) {
+      this.loginSubscription.unsubscribe();
+    }
   }
 
 }

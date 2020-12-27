@@ -20,7 +20,8 @@
       </button>
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="exampleOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+           aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -48,14 +49,21 @@
         <button type="button" class="btn btn-warning" style="pointer-events: none">{{order.status.label}}</button>&nbsp;
         <button type="button" class="btn btn-outline-danger" (click)="onCancel(order.idOrder)">Annuler</button>
       </span>
-      <button type="button" class="btn btn-primary" style="pointer-events: none" *ngIf="order.status.idStatus === 4">{{order.status.label}}</button>
-      <button type="button" class="btn btn-secondary" style="pointer-events: none" *ngIf="order.status.idStatus === 2">{{order.status.label}}</button>
-      <button type="button" class="btn btn-success" style="pointer-events: none" *ngIf="order.status.idStatus === 5">{{order.status.label}}</button>
-      <button type="button" class="btn btn-danger" style="pointer-events: none"  *ngIf="order.status.idStatus === 6">{{order.status.label}}</button>
-      <button type="button" class="btn btn-info" style="pointer-events: none" *ngIf="order.status.idStatus === 3">{{order.status.label}}</button>
+      <button type="button" class="btn btn-primary" style="pointer-events: none"
+              *ngIf="order.status.idStatus === 4">{{order.status.label}}</button>
+      <button type="button" class="btn btn-secondary" style="pointer-events: none"
+              *ngIf="order.status.idStatus === 2">{{order.status.label}}</button>
+      <button type="button" class="btn btn-success" style="pointer-events: none"
+              *ngIf="order.status.idStatus === 5">{{order.status.label}}</button>
+      <button type="button" class="btn btn-danger" style="pointer-events: none"
+              *ngIf="order.status.idStatus === 6">{{order.status.label}}</button>
+      <button type="button" class="btn btn-info" style="pointer-events: none"
+              *ngIf="order.status.idStatus === 3">{{order.status.label}}</button>
     </td>
     <td>
-      <button *ngIf="order.status.idStatus !== 6 && order.status.idStatus !== 5 && order.status.idStatus !== 4" type="button" class="btn btn-success">Confirmer le paiement</button>
+      <button *ngIf="order.status.idStatus !== 6 && order.status.idStatus !== 5 && order.status.idStatus !== 4"
+              type="button" class="btn btn-success">Confirmer le paiement
+      </button>
       <button *ngIf="order.status.idStatus === 4" type="button" class="btn btn-success">Confirmer l'enlèvement</button>
     </td>
   </tr>

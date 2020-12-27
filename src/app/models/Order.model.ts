@@ -10,5 +10,6 @@ export class Order {
   status: OrderStatus;
   soldItems: SoldItem[];
 
-  constructor() {}
+  constructor() {
+  }
 }

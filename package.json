@@ -30,6 +30,8 @@
     "jwt-decode": "^2.2.0",
     "mat-icon-import": "^0.1.1",
     "material-icons": "^0.3.1",
+    "mdb-ui-kit": "^3.0.0",
+    "ng2-search-filter": "^0.5.1",
     "ngp-sort-pipe": "0.0.4",
     "popper.js": "^1.16.1",
     "rxjs": "~6.6.3",

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Measure} from '../models/Measure.model';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -17,7 +17,7 @@ export class MeasureService {
     return this.httpClient.get<Measure[]>(`${API_URL}measure/all`);
   }
 
-  getMeasureById(id: number): Observable<Measure>{
+  getMeasureById(id: number): Observable<Measure> {
     return this.httpClient.get<Measure>(`${API_URL}measure/${id}`);
   }
 }

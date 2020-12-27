@@ -5,7 +5,7 @@
     <th scope="col">Client</th>
     <th scope="col">Email</th>
     <th scope="col">Adresse</th>
-    <th scope="col">Newsletter ?</th>
+    <th scope="col">Verifié ?</th>
   </tr>
   </thead>
   <tbody>
@@ -14,8 +14,8 @@
     <td style="width: 28%">{{user.firstName | titlecase}} {{user.lastName | uppercase}}</td>
     <td style="width: 25%">{{user.email}}</td>
     <td style="width: 30%">{{user.address | titlecase}}<br>{{user.address2}}</td>
-    <td style="width: 15%" *ngIf="user.newsletter">Oui</td>
-    <td style="width: 15%" *ngIf="!user.newsletter">Non</td>
+    <td style="width: 15%" *ngIf="user.verified">Oui</td>
+    <td style="width: 15%" *ngIf="!user.verified">Non</td>
   </tr>
   </tbody>
 </table>

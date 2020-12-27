@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {API_URL, HTTP_OPTIONS} from '../app.constants';
 import {HttpClient, HttpParams} from '@angular/common/http';
@@ -9,7 +9,8 @@ import {User} from '../models/User.model';
 })
 export class UserService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   newCustomer(newUser: User): Observable<User> {
     return this.httpClient.post<User>(API_URL + 'user/customer/add', newUser, HTTP_OPTIONS);

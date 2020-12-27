@@ -1,2 +1,23 @@
-<p *ngFor="let stock of cart?.stocks">{{stock?.item.label}}</p>
-<button type="button" class="btn btn-primary" (click)="onOrder()" *ngIf="this.cart.stocks?.length > 0" >Commander</button>
+<div>
+  <table class="table table-bordered container w-50 mt-2">
+    <thead>
+    <tr>
+      <th scope="col">Article</th>
+      <th scope="col">Prix</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let stock of cart?.stocks; index as i">
+      <td class="custom-title">
+        {{stock?.item.label | lowercase}}
+        <span class="text-muted">( €{{stock?.item.price}}/{{stock?.item.qt}}{{stock?.item.measure.unit}} )</span>
+      </td>
+      <td>€{{stock?.item.price}}</td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <td>€{{total}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

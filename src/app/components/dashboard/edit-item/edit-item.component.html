@@ -3,7 +3,8 @@
   <form [formGroup]="editItemForm" data-children-count="10" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="label">Titre</label>
-      <input class="form-control" id="label" formControlName="label" type="text" [ngClass]="{ 'is-invalid': submitted && f.label.errors }">
+      <input class="form-control" id="label" formControlName="label" type="text"
+             [ngClass]="{ 'is-invalid': submitted && f.label.errors }">
       <div *ngIf="submitted && f.label.errors" class="invalid-feedback">
         <div *ngIf="f.label.errors.required">Veuillez entrer un titre</div>
       </div>
@@ -23,9 +24,11 @@
 
     <div class="form-group">
       <label for="measureSelect">Mesure (valeur actuelle : {{this.item.measure.label}})</label>
-      <select id="measureSelect" class="form-control" formControlName="measure" [ngClass]="{ 'is-invalid': submitted && f.measure.errors }">
+      <select id="measureSelect" class="form-control" formControlName="measure"
+              [ngClass]="{ 'is-invalid': submitted && f.measure.errors }">
         <option [ngValue]="null" disabled>Choisissez une unité de mesure</option>
-        <option *ngFor="let measure of measures | sortBy: 'asc':'label'" [ngValue]="measure" class="form-control" id="measure">{{measure.label}}</option>
+        <option *ngFor="let measure of measures | sortBy: 'asc':'label'" [ngValue]="measure" class="form-control"
+                id="measure">{{measure.label}}</option>
       </select>
       <div *ngIf="submitted && f.measure.errors" class="invalid-feedback">
         <div *ngIf="f.measure.errors.required">Veuillez entrer une unité de mesure</div>
@@ -35,7 +38,7 @@
 
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary btn-block" >Editer le produit</button>
+      <button type="submit" class="btn btn-primary btn-block">Editer le produit</button>
     </div>
   </form>
 </article>

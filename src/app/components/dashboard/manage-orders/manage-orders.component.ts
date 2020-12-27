@@ -19,7 +19,8 @@ export class ManageOrdersComponent implements OnInit, OnDestroy {
   orderSubscription: Subscription;
 
   constructor(private itemService: ItemService,
-              private orderService: OrderService) { }
+              private orderService: OrderService) {
+  }
 
   ngOnInit(): void {
     this.itemSubscription = this.itemService.getAllItems().subscribe(
@@ -41,15 +42,19 @@ export class ManageOrdersComponent implements OnInit, OnDestroy {
   }
 
   onCancel(id: number): void {
-    if (confirm('Voulez-vous vraiment annuler la commande n° ' + id + ' ?')){
+    if (confirm('Voulez-vous vraiment annuler la commande n° ' + id + ' ?')) {
       this.orderService.cancelOrder(id);
       location.reload();
     }
   }
 
   ngOnDestroy(): void {
-    if (this.itemSubscription) { this.itemSubscription.unsubscribe(); }
-    if (this.orderSubscription) { this.orderSubscription.unsubscribe(); }
+    if (this.itemSubscription) {
+      this.itemSubscription.unsubscribe();
+    }
+    if (this.orderSubscription) {
+      this.orderSubscription.unsubscribe();
+    }
   }
 
 }

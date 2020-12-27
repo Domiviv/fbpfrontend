@@ -14,7 +14,8 @@ export class ManageCustomersComponent implements OnInit, OnDestroy {
   users: User[];
   userSubscription: Subscription;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService) {
+  }
 
   ngOnInit(): void {
     this.userSubscription = this.userService.getAllCustomers().subscribe(
@@ -28,6 +29,8 @@ export class ManageCustomersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 }

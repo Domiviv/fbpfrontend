@@ -1,4 +1,4 @@
-import { Role } from './Role.model';
+import {Role} from './Role.model';
 
 export class User {
   idUser: number;
@@ -8,7 +8,7 @@ export class User {
   firstName: string;
   address: string;
   address2: string;
-  newsletter: boolean;
+  verified: boolean;
   role: Role;
 
   constructor() {

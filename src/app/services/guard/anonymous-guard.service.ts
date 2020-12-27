@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {TokenStorageService} from '../auth/token-storage.service';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
@@ -9,7 +9,8 @@ import {Observable} from 'rxjs';
 export class AnonymousGuardService implements CanActivate {
 
   constructor(private tokenStorage: TokenStorageService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   canActivate(
     route: ActivatedRouteSnapshot,

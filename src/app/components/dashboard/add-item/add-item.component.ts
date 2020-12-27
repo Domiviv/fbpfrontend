@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {Item} from '../../../models/Item.model';
@@ -21,12 +21,10 @@ export class AddItemComponent implements OnInit, OnDestroy {
   newItem = new Item();
   submitted = false;
   itemSubscription: Subscription;
-  itemContainsSubscription: Subscription;
   measureSubscription: Subscription;
   allergenSubscription: Subscription;
   measures: Measure[];
   allergens: Allergen[];
-  allergensList: Allergen[];
   iC = new ItemContains();
   item = new Item();
 
@@ -63,7 +61,8 @@ export class AddItemComponent implements OnInit, OnDestroy {
       descr: [null],
       qt: [null],
       measure: [null, Validators.required],
-      allergens: new FormArray([])
+      allergens: new FormArray([]),
+      image: [null]
     });
   }
 
@@ -98,25 +97,28 @@ export class AddItemComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
-    if (this.itemSubscription) {
-      this.itemSubscription.unsubscribe();
-    }
-    this.measureSubscription.unsubscribe();
-    this.allergenSubscription.unsubscribe();
-    // this.itemContainsSubscription.unsubscribe();
-  }
-
   onCheckChange(allergen): void {
     const index: number = this.addItemForm.value.allergens.indexOf(
       this.addItemForm.value.allergens.find(a => a.idAllergen === allergen.idAllergen
       ));
-    if ( index !== -1){
+    if (index !== -1) {
       this.addItemForm.value.allergens.splice(index, 1);
-    }
-    else {
+    } else {
       this.addItemForm.value.allergens.push(allergen);
     }
     console.log(this.addItemForm.value.allergens);
   }
+
+  ngOnDestroy(): void {
+    if (this.itemSubscription) {
+      this.itemSubscription.unsubscribe();
+    }
+    if (this.measureSubscription) {
+      this.measureSubscription.unsubscribe();
+    }
+    if (this.allergenSubscription) {
+      this.allergenSubscription.unsubscribe();
+    }
+  }
+
 }

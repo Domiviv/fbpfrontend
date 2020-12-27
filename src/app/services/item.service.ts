@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Item } from '../models/Item.model';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {Injectable} from '@angular/core';
+import {Item} from '../models/Item.model';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import {API_URL, HTTP_OPTIONS} from '../app.constants';
 import {ItemContains} from '../models/ItemContains.model';
 
@@ -18,7 +18,7 @@ export class ItemService {
     return this.httpClient.get<Item[]>(`${API_URL}item/all`);
   }
 
-  getItemById(id: number): Observable<Item>{
+  getItemById(id: number): Observable<Item> {
     return this.httpClient.get<Item>(`${API_URL}item/${id}`);
   }
 
@@ -27,7 +27,7 @@ export class ItemService {
   }
 
   updateItem(newItem: Item): Observable<Item> {
-    return this.httpClient.put<Item>(API_URL + 'item/update/' + newItem.idItem , newItem, HTTP_OPTIONS);
+    return this.httpClient.put<Item>(API_URL + 'item/update/' + newItem.idItem, newItem, HTTP_OPTIONS);
   }
 
   newItemContains(newItemContains: ItemContains): Observable<ItemContains> {

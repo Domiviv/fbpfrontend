@@ -30,7 +30,8 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
               private orderService: OrderService,
               private tokenStorageService: TokenStorageService,
               private soldItemService: SoldItemService,
-              private modalService: NgbModal) { }
+              private modalService: NgbModal) {
+  }
 
   ngOnInit(): void {
 
@@ -67,15 +68,22 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   }
 
   onCancel(id: number): void {
-    if (confirm('Voulez-vous vraiment annuler la commande n° ' + id + ' ?')){
+    if (confirm('Voulez-vous vraiment annuler la commande n° ' + id + ' ?')) {
       this.orderService.cancelOrder(id);
       location.reload();
     }
   }
 
   ngOnDestroy(): void {
-   if (this.itemSubscription) { this.itemSubscription.unsubscribe(); }
-   if (this.orderSubscription) { this.orderSubscription.unsubscribe(); }
+    if (this.itemSubscription) {
+      this.itemSubscription.unsubscribe();
+    }
+    if (this.orderSubscription) {
+      this.orderSubscription.unsubscribe();
+    }
+    if (this.soldItemSubscription) {
+      this.soldItemSubscription.unsubscribe();
+    }
   }
 
 }
