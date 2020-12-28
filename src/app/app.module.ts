@@ -30,6 +30,10 @@ import {MyOrdersComponent} from './components/my-orders/my-orders.component';
 import {PurchaseComponent} from './components/purchase/purchase.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { FooterComponent } from './components/footer/footer.component';
+import { LegalComponent } from './components/legal/legal.component';
+import { RgpdComponent } from './components/rgpd/rgpd.component';
+import { CgvComponent } from './components/cgv/cgv.component';
 
 
 const appRoutes: Routes = [
@@ -93,6 +97,9 @@ const appRoutes: Routes = [
   {path: 'register', canActivate: [AnonymousGuardService], component: RegisterComponent},
   {path: 'login', canActivate: [AnonymousGuardService], component: LoginComponent},
   {path: 'home', component: HomeItemsComponent},
+  {path: 'cgv', component: CgvComponent},
+  {path: 'rgpd', component: RgpdComponent},
+  {path: 'legal', component: LegalComponent},
   {path: '', component: HomeItemsComponent},
   {path: 'not-found', component: NotFoundComponent},
   {path: '**', redirectTo: 'not-found'}
@@ -111,7 +118,11 @@ const appRoutes: Routes = [
     ManageOrdersComponent,
     EditItemComponent,
     MyOrdersComponent,
-    PurchaseComponent
+    PurchaseComponent,
+    FooterComponent,
+    LegalComponent,
+    RgpdComponent,
+    CgvComponent
   ],
   imports: [
     BrowserModule,

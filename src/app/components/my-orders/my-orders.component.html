@@ -1,54 +1,56 @@
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th scope="col">N° de commande</th>
-    <th scope="col">Produits</th>
-    <th scope="col">Date de commande</th>
-    <th scope="col">Date d'enlèvement</th>
-    <th scope="col">Statut</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let order of orders">
-    <td style="width: 10%">{{order.idOrder}}</td>
-    <td>
-      <!-- Modal -->
-      <ng-template #orderModal let-modal>
-        <ng-container *ngIf="order">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h2 class="modal-title" id="exampleModalLongTitle">Commande n°{{order.idOrder}}</h2>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                      (click)="modal.dismiss('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
+<div style="min-height: 1000px;">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">N° de commande</th>
+      <th scope="col">Produits</th>
+      <th scope="col">Date de commande</th>
+      <th scope="col">Date d'enlèvement</th>
+      <th scope="col">Statut</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let order of orders">
+      <td style="width: 10%">{{order.idOrder}}</td>
+      <td>
+        <!-- Modal -->
+        <ng-template #orderModal let-modal>
+          <ng-container *ngIf="order">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2 class="modal-title" id="exampleModalLongTitle">Commande n°{{order.idOrder}}</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        (click)="modal.dismiss('Cross click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p *ngFor="let soldItem of order.soldItems">{{soldItem.item.label}}</p>
+              </div>
             </div>
-            <div class="modal-body">
-              <p *ngFor="let soldItem of order.soldItems">{{soldItem.item.label}}</p>
-            </div>
-          </div>
-        </ng-container>
-      </ng-template>
+          </ng-container>
+        </ng-template>
 
-      <button type="button" class="btn btn-primary" (click)="onClick(orderModal,order)">Info</button>
-    <td>{{order.orderDt | date: 'dd/MM/yyyy HH:mm'}}</td>
-    <td>{{order.pickupDt | date: 'dd/MM/yyyy HH:mm'}}</td>
-    <td>
-      <span *ngIf="order.status.idStatus === 1">
-        <button type="button" class="btn btn-warning" style="pointer-events: none">{{order.status.label}}</button>&nbsp;
-        <button type="button" class="btn btn-outline-danger" (click)="onCancel(order.idOrder)">Annuler</button>
-      </span>
-      <button type="button" class="btn btn-primary" style="pointer-events: none"
-              *ngIf="order.status.idStatus === 4">{{order.status.label}}</button>
-      <button type="button" class="btn btn-secondary" style="pointer-events: none"
-              *ngIf="order.status.idStatus === 2">{{order.status.label}}</button>
-      <button type="button" class="btn btn-success" style="pointer-events: none"
-              *ngIf="order.status.idStatus === 5">{{order.status.label}}</button>
-      <button type="button" class="btn btn-danger" style="pointer-events: none"
-              *ngIf="order.status.idStatus === 6">{{order.status.label}}</button>
-      <button type="button" class="btn btn-info" style="pointer-events: none"
-              *ngIf="order.status.idStatus === 3">{{order.status.label}}</button>
-    </td>
-  </tr>
-  </tbody>
-</table>
+        <button type="button" class="btn btn-primary" (click)="onClick(orderModal,order)">Info</button>
+      <td>{{order.orderDt | date: 'dd/MM/yyyy HH:mm'}}</td>
+      <td>{{order.pickupDt | date: 'dd/MM/yyyy HH:mm'}}</td>
+      <td>
+        <span *ngIf="order.status.idStatus === 1">
+          <button type="button" class="btn btn-warning" style="pointer-events: none">{{order.status.label}}</button>&nbsp;
+          <button type="button" class="btn btn-outline-danger" (click)="onCancel(order.idOrder)">Annuler</button>
+        </span>
+        <button type="button" class="btn btn-primary" style="pointer-events: none"
+                *ngIf="order.status.idStatus === 4">{{order.status.label}}</button>
+        <button type="button" class="btn btn-secondary" style="pointer-events: none"
+                *ngIf="order.status.idStatus === 2">{{order.status.label}}</button>
+        <button type="button" class="btn btn-success" style="pointer-events: none"
+                *ngIf="order.status.idStatus === 5">{{order.status.label}}</button>
+        <button type="button" class="btn btn-danger" style="pointer-events: none"
+                *ngIf="order.status.idStatus === 6">{{order.status.label}}</button>
+        <button type="button" class="btn btn-info" style="pointer-events: none"
+                *ngIf="order.status.idStatus === 3">{{order.status.label}}</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

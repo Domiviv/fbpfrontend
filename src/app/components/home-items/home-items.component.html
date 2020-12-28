@@ -1,11 +1,11 @@
 <div class="row">
 
   <!--RIGHT MENU & SEARCH ITEM-->
-  <div class="col-lg-3" style="background-color: #fffbf2">
+  <div class="col-lg-3" style="min-height: 1000px; background-color: #fffbf2">
     <h2 class="my-3">Ferme de Blanche Pierre</h2>
     <div class="list-group">
       <a class="list-group-item text-dark" [routerLink]="['/home']">Produits</a>
-      <a class="list-group-item text-dark" [routerLink]="['/contact']">Contact</a>
+      <a class="list-group-item text-dark" href="#contact">Contact</a>
       <input class="form-control mt-2 me-2" type="text" placeholder="Rechercher un produit" name="search"
              aria-label="Search" [(ngModel)]="searchText">
     </div>
