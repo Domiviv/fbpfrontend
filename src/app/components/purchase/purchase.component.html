@@ -20,4 +20,15 @@
     </tr>
     </tbody>
   </table>
+
+  <table class="table table-borderless container w-50 mt-2">
+    <tbody>
+    <tr>
+      <td>
+        <button type="button" class="btn btn-primary" (click)="onOrder()" *ngIf="this.cart.stocks?.length > 0" >Commander</button>
+      </td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
 </div>

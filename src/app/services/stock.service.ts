@@ -12,7 +12,7 @@ export class StockService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getStockItemByItemId(idItem: number): Observable<Stock> {
+  getStockByItemId(idItem: number): Observable<Stock> {
     return this.httpClient.get<Stock>(API_URL + 'stock/item/' + idItem);
   }
 }

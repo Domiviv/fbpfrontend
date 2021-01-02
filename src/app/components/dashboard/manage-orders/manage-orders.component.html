@@ -14,57 +14,59 @@
   <tr *ngFor="let order of orders | sortBy: 'asc' : 'status.idStatus'">
     <td style="width: 10%">{{order.idOrder}}</td>
     <td>
-      <!-- Button trigger modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleOrderModal">
-        Infos
-      </button>
-
       <!-- Modal -->
-      <div class="modal fade" id="exampleOrderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-           aria-hidden="true">
-        <div class="modal-dialog" role="document">
+      <ng-template #orderModal let-modal>
+        <ng-container *ngIf="order">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Commande n°{{order.idOrder}}</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <h2 class="modal-title" id="exampleModalLongTitle">Commande n°{{order.idOrder}}</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                      (click)="modal.dismiss('Cross click')">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <p class="list-item" *ngFor="let item of order.items">{{item?.label | titlecase}}</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+              <p *ngFor="let soldItem of order.soldItems">{{soldItem.item.label}}</p>
             </div>
           </div>
-        </div>
-      </div>
-    </td>
-
+        </ng-container>
+      </ng-template>
+      <button type="button" class="btn btn-primary" (click)="onClick(orderModal,order)">Info</button>
     <td>{{order.orderDt | date: 'dd/MM/yyyy HH:mm'}}</td>
     <td>{{order.pickupDt | date: 'dd/MM/yyyy HH:mm'}}</td>
     <td>{{order.user.firstName}} {{order.user.lastName}}</td>
     <td>
-      <span *ngIf="order.status.idStatus === 1">
-        <button type="button" class="btn btn-warning" style="pointer-events: none">{{order.status.label}}</button>&nbsp;
-        <button type="button" class="btn btn-outline-danger" (click)="onCancel(order.idOrder)">Annuler</button>
-      </span>
-      <button type="button" class="btn btn-primary" style="pointer-events: none"
-              *ngIf="order.status.idStatus === 4">{{order.status.label}}</button>
+      <!--Waiting for payment-->
+      <button type="button" class="btn btn-warning" style="pointer-events: none"
+              *ngIf="order.status.idStatus === 1">{{order.status.label}}</button>
+
+      <!-- Waiting for receipt (on site payment)-->
       <button type="button" class="btn btn-secondary" style="pointer-events: none"
               *ngIf="order.status.idStatus === 2">{{order.status.label}}</button>
-      <button type="button" class="btn btn-success" style="pointer-events: none"
-              *ngIf="order.status.idStatus === 5">{{order.status.label}}</button>
-      <button type="button" class="btn btn-danger" style="pointer-events: none"
-              *ngIf="order.status.idStatus === 6">{{order.status.label}}</button>
+
+      <!--Waiting for receipt (online payment)-->
       <button type="button" class="btn btn-info" style="pointer-events: none"
               *ngIf="order.status.idStatus === 3">{{order.status.label}}</button>
+
+      <!--Paid-->
+      <button type="button" class="btn btn-primary" style="pointer-events: none"
+              *ngIf="order.status.idStatus === 4">{{order.status.label}}</button>
+
+      <!--Received-->
+      <button type="button" class="btn btn-success" style="pointer-events: none"
+              *ngIf="order.status.idStatus === 5">{{order.status.label}}</button>
+
+      <!--Canceled-->
+      <button type="button" class="btn btn-danger" style="pointer-events: none"
+              *ngIf="order.status.idStatus === 6">{{order.status.label}}</button>
     </td>
     <td>
       <button *ngIf="order.status.idStatus !== 6 && order.status.idStatus !== 5 && order.status.idStatus !== 4"
-              type="button" class="btn btn-success">Confirmer le paiement
+              type="button" class="btn btn-primary" (click)="onConfirmPayment(order.idOrder)">Confirmer le paiement
       </button>
-      <button *ngIf="order.status.idStatus === 4" type="button" class="btn btn-success">Confirmer l'enlèvement</button>
+      <button *ngIf="order.status.idStatus === 4" type="button" class="btn btn-success"
+              (click)="onConfirmReceipt(order.idOrder)">Confirmer l'enlèvement
+      </button>
     </td>
   </tr>
   </tbody>

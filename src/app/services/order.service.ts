@@ -27,13 +27,18 @@ export class OrderService {
     return true;
   }
 
+  confirmPayment(id: number): boolean {
+    this.httpClient.put(API_URL + 'order/confirm-payment/' + id, HTTP_OPTIONS).subscribe();
+    return true;
+  }
+
+  confirmReceipt(id: number): boolean {
+    this.httpClient.put(API_URL + 'order/confirm-receipt/' + id, HTTP_OPTIONS).subscribe();
+    return true;
+  }
+
   addOrder(idUser: number, stocks: Stock[]): void {
-    console.log(stocks);
-    this.httpClient.post<boolean>(API_URL + 'order/add?idUser=' + idUser, stocks, HTTP_OPTIONS).subscribe(
-      data => {
-        console.log(data);
-      }
-    );
+    this.httpClient.post<boolean>(API_URL + 'order/add?idUser=' + idUser, stocks, HTTP_OPTIONS);
   }
 
   // getItemById(id: number): Observable<Item>{

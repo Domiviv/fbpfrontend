@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
   submitted = false;
   pwdMinLength = 4;
   userSubscription: Subscription;
+  emailError = false;
 
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
@@ -65,10 +66,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.newUser.address2 = this.registerForm.value.postcode + ', ' + this.registerForm.value.city;
     this.newUser.pwd = this.registerForm.value.pwd;
 
-    this.userSubscription = this.userService.newCustomer(this.newUser).subscribe(
-      () => {
-        alert('Félicitation, votre compte a été créé.\n\nVous serez redirigé vers la page de connexion après avoir cliqué sur "Ok"');
-        this.router.navigate(['login']);
+    this.userSubscription = this.userService.addCustomer(this.newUser).subscribe(
+      (data) => {
+        if (data === true){
+          alert('Félicitation, votre compte a été créé.\n\nVous serez redirigé vers la page de connexion après avoir cliqué sur "Ok"');
+          this.router.navigate(['login']);
+        }
+        else{
+          alert('Cet email existe déjà!');
+        }
       }
     );
 

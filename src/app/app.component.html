@@ -22,7 +22,7 @@
         </div>
       </li>
     </ul>
-    <button class="btn">
+    <button class="btn" *ngIf="!isAdmin">
       <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-cart4" fill="currentColor"
            xmlns="http://www.w3.org/2000/svg" data-toggle="modal" data-target="#exampleModal">
         <path fill-rule="evenodd"
@@ -75,7 +75,7 @@
       </div>
     </div>
 
-    <button *ngIf="isCustomer" class="btn">
+    <button *ngIf="isCustomer" [routerLink]="['/profile']" class="btn">
       <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor"
            xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd"

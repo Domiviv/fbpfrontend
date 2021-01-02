@@ -30,10 +30,11 @@ import {MyOrdersComponent} from './components/my-orders/my-orders.component';
 import {PurchaseComponent} from './components/purchase/purchase.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
-import { FooterComponent } from './components/footer/footer.component';
-import { LegalComponent } from './components/legal/legal.component';
-import { RgpdComponent } from './components/rgpd/rgpd.component';
-import { CgvComponent } from './components/cgv/cgv.component';
+import {FooterComponent} from './components/footer/footer.component';
+import {LegalComponent} from './components/legal/legal.component';
+import {RgpdComponent} from './components/rgpd/rgpd.component';
+import {CgvComponent} from './components/cgv/cgv.component';
+import {ProfileComponent} from './components/profile/profile.component';
 
 
 const appRoutes: Routes = [
@@ -94,6 +95,14 @@ const appRoutes: Routes = [
       expectedRole: ['ROLE_CLIENT']
     }
   },
+  {
+    path: 'profile',
+    canActivate: [RoleGuardService],
+    component: ProfileComponent,
+    data: {
+      expectedRole: ['ROLE_CLIENT']
+    }
+  },
   {path: 'register', canActivate: [AnonymousGuardService], component: RegisterComponent},
   {path: 'login', canActivate: [AnonymousGuardService], component: LoginComponent},
   {path: 'home', component: HomeItemsComponent},
@@ -122,7 +131,8 @@ const appRoutes: Routes = [
     FooterComponent,
     LegalComponent,
     RgpdComponent,
-    CgvComponent
+    CgvComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

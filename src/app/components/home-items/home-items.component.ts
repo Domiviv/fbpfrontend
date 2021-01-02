@@ -17,16 +17,6 @@ import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 })
 export class HomeItemsComponent implements OnInit, OnDestroy {
 
-  constructor(private itemService: ItemService,
-              private tokenStorageService: TokenStorageService,
-              private cartService: CartService,
-              private userService: UserService,
-              private stockService: StockService,
-              private modalService: NgbModal
-  ) {
-  }
-
-
   isAdmin = false;
   isCustomer = false;
   items: Item[];
@@ -37,6 +27,15 @@ export class HomeItemsComponent implements OnInit, OnDestroy {
   userSubscription: Subscription;
   searchText: any;
   closeResult = '';
+
+  constructor(private itemService: ItemService,
+              private tokenStorageService: TokenStorageService,
+              private cartService: CartService,
+              private userService: UserService,
+              private stockService: StockService,
+              private modalService: NgbModal
+  ) {
+  }
 
   open(content): void {
     this.modalService.open(content, {scrollable: true, centered: true, ariaLabelledBy: 'overview-item'}).result.then((result) => {
@@ -72,9 +71,6 @@ export class HomeItemsComponent implements OnInit, OnDestroy {
       this.userSubscription = this.userService.getUserByEmail(this.tokenStorageService.getUser()).subscribe(
         (user: User) => {
           this.idUser = user.idUser.toString();
-
-          console.log(this.cartService.getCart(this.idUser));
-          console.log(this.cartService.ifExistInCart(59, this.idUser));
         }, error => {
           console.log(error);
         }
@@ -84,7 +80,7 @@ export class HomeItemsComponent implements OnInit, OnDestroy {
 
   onAdd(idItem): void {
     if (this.isCustomer) {
-      this.cartSubscription = this.stockService.getStockItemByItemId(idItem).subscribe(
+      this.cartSubscription = this.stockService.getStockByItemId(idItem).subscribe(
         (stock) => {
           if (stock) {
             this.cartService.addToCart(stock, this.idUser);

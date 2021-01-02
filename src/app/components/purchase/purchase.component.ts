@@ -47,6 +47,8 @@ export class PurchaseComponent implements OnInit, OnDestroy {
   onOrder(): void {
     this.orderService.addOrder(this.user.idUser, this.cart.stocks);
     this.cartService.removeCart();
+    // tslint:disable-next-line:max-line-length
+    alert('Merci pour votre commande. Vous allez recevoir un e-mail dans les prochaines minutes\n\nVous serez redirigé vers la liste des produits après avoir cliqué sur "Ok"');
     this.router.navigate(['home']).then(() => location.reload());
   }
 

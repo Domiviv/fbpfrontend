@@ -4,6 +4,7 @@ import {Order} from '../../../models/Order.model';
 import {Subscription} from 'rxjs';
 import {ItemService} from '../../../services/item.service';
 import {OrderService} from '../../../services/order.service';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-manage-orders',
@@ -15,11 +16,13 @@ export class ManageOrdersComponent implements OnInit, OnDestroy {
 
   items: Item[];
   orders: Order[];
+  order: Order;
   itemSubscription: Subscription;
   orderSubscription: Subscription;
 
   constructor(private itemService: ItemService,
-              private orderService: OrderService) {
+              private orderService: OrderService,
+              private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -41,11 +44,23 @@ export class ManageOrdersComponent implements OnInit, OnDestroy {
     );
   }
 
-  onCancel(id: number): void {
-    if (confirm('Voulez-vous vraiment annuler la commande n° ' + id + ' ?')) {
-      this.orderService.cancelOrder(id);
+  onConfirmPayment(id: number): void {
+    if (confirm('Voulez-vous vraiment confirmer le paiement de la commande n° ' + id + ' ?')) {
+      this.orderService.confirmPayment(id);
       location.reload();
     }
+  }
+
+  onConfirmReceipt(id: number): void {
+    if (confirm('Voulez-vous vraiment confirmer l\'enlèvement de la commande n° ' + id + ' ?')) {
+      this.orderService.confirmReceipt(id);
+      location.reload();
+    }
+  }
+
+  onClick(orderModal, order: Order): void {
+    this.order = order;
+    this.modalService.open(orderModal, {scrollable: true, centered: true});
   }
 
   ngOnDestroy(): void {

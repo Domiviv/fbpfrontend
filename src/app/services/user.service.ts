@@ -12,8 +12,8 @@ export class UserService {
   constructor(private httpClient: HttpClient) {
   }
 
-  newCustomer(newUser: User): Observable<User> {
-    return this.httpClient.post<User>(API_URL + 'user/customer/add', newUser, HTTP_OPTIONS);
+  addCustomer(newUser: User): Observable<boolean> {
+    return this.httpClient.post<boolean>(API_URL + 'user/customer/add', newUser, HTTP_OPTIONS);
   }
 
   getAllUsers(): Observable<User[]> {

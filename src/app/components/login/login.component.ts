@@ -53,7 +53,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.isLoggedIn = true;
       },
       error => {
-        this.errorMessage = error.error = 'Adresse email et/ou mot de passe invalide';
+        this.errorMessage = error.error = 'adresse email et/ou mot de passe invalide';
         this.isLoginFailed = true;
       }
     );
