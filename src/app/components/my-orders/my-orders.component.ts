@@ -22,8 +22,6 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   soldItems: SoldItem[];
   user: User;
   order: Order;
-  soldItemSubscription: Subscription;
-  itemSubscription: Subscription;
   orderSubscription: Subscription;
 
   constructor(private itemService: ItemService,
@@ -35,14 +33,6 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    this.itemSubscription = this.itemService.getAllItems().subscribe(
-      (items: Item[]) => {
-        this.items = items;
-      }, error => {
-        console.log(error);
-      }
-    );
-
     this.orderSubscription = this.orderService.getOrdersByUserEmail(this.tokenStorageService.getUser()).subscribe(
       (orders: Order[]) => {
         this.orders = orders;
@@ -51,15 +41,6 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
         console.log(error);
       }
     );
-
-    // this.soldItemSubscription = this.soldItemService.getAllSoldItems().subscribe(
-    //   (soldItems: SoldItem[]) => {
-    //     this.soldItems = soldItems;
-    //     console.log(soldItems);
-    //   }, error => {
-    //     console.log(error);
-    //   }
-    // );
   }
 
   onClick(orderModal, order: Order): void {
@@ -75,14 +56,8 @@ export class MyOrdersComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.itemSubscription) {
-      this.itemSubscription.unsubscribe();
-    }
     if (this.orderSubscription) {
       this.orderSubscription.unsubscribe();
-    }
-    if (this.soldItemSubscription) {
-      this.soldItemSubscription.unsubscribe();
     }
   }
 
