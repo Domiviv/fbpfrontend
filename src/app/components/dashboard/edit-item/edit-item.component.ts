@@ -79,7 +79,7 @@ export class EditItemComponent implements OnInit, OnDestroy {
     this.newItem.qt = this.editItemForm.value.qt;
     this.newItem.measure = this.editItemForm.value.measure;
 
-    this.itemSubscription = this.itemService.updateItem(this.newItem).subscribe(
+    this.itemSubscription = this.itemService.updateItemById(this.newItem).subscribe(
       () => {
         // tslint:disable-next-line:max-line-length
         alert('Félicitation, le produit a été modifié.\n\nVous serez redirigé vers la liste des produits après avoir cliqué sur "Ok"');

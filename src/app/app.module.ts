@@ -35,7 +35,40 @@ import {LegalComponent} from './components/legal/legal.component';
 import {RgpdComponent} from './components/rgpd/rgpd.component';
 import {ConditionsComponent} from './components/conditions/conditions.component';
 import {ProfileComponent} from './components/profile/profile.component';
+import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
 
+const cookieConfig: NgcCookieConsentConfig = {
+
+  cookie: {
+    domain: 'http://localhost:4200'
+  },
+  position: 'bottom',
+  theme: 'classic',
+  palette: {
+    popup: {
+      background: '#9C5242',
+      text: '#fffbf2',
+      link: '#ffffff'
+    },
+    button: {
+      background: '#fffbf2',
+      text: '#9C5242',
+      border: 'transparent'
+    }
+  },
+  type: 'info',
+  content: {
+    message: 'Ce site web utilise des cookies pour vous assurer la meilleure expérience de navigation sur notre site.',
+    dismiss: 'OK, j\'ai compris!',
+    deny: 'Refuser',
+    link: 'Plus d\'information',
+    href: 'terms-and-conditions',
+    policy: 'Cookie Policy',
+    header: 'Cookies sur le site!',
+    allow: 'Autoriser les cookies'
+  }
+
+};
 
 const appRoutes: Routes = [
   {
@@ -142,7 +175,8 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes, {relativeLinkResolution: 'legacy'}),
     NgbModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    NgcCookieConsentModule.forRoot(cookieConfig)
   ],
   providers: [
     AllergenService,

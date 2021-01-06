@@ -22,11 +22,11 @@ export class ItemService {
     return this.httpClient.get<Item>(`${API_URL}item/${id}`);
   }
 
-  newItem(newItem: Item): Observable<Item> {
+  addItem(newItem: Item): Observable<Item> {
     return this.httpClient.post<Item>(API_URL + 'item/add', newItem, HTTP_OPTIONS);
   }
 
-  updateItem(newItem: Item): Observable<Item> {
+  updateItemById(newItem: Item): Observable<Item> {
     return this.httpClient.put<Item>(API_URL + 'item/update/' + newItem.idItem, newItem, HTTP_OPTIONS);
   }
 

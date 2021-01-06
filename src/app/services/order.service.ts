@@ -38,7 +38,7 @@ export class OrderService {
   }
 
   addOrder(idUser: number, stocks: Stock[]): void {
-    this.httpClient.post<boolean>(API_URL + 'order/add?idUser=' + idUser, stocks, HTTP_OPTIONS);
+    this.httpClient.post<boolean>(API_URL + 'order/add?idUser=' + idUser, stocks, HTTP_OPTIONS).subscribe();
   }
 
   // getItemById(id: number): Observable<Item>{

@@ -88,7 +88,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
     alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.newItem, null, 4));
     console.log(this.addItemForm.value.allergens);
 
-    this.itemSubscription = this.itemService.newItem(this.newItem).subscribe(
+    this.itemSubscription = this.itemService.addItem(this.newItem).subscribe(
       () => {
         // tslint:disable-next-line:max-line-length
         alert('Félicitation, un nouveau produit a été ajouté.\n\nVous serez redirigé vers la liste des produits après avoir cliqué sur "Ok"');
