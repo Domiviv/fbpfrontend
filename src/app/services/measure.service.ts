@@ -13,10 +13,12 @@ export class MeasureService {
   constructor(private httpClient: HttpClient) {
   }
 
+  // Récupère les mesures
   getAllMeasures(): Observable<Measure[]> {
     return this.httpClient.get<Measure[]>(`${API_URL}measure/all`);
   }
 
+  // Récupère une mesure sur base de son id
   getMeasureById(id: number): Observable<Measure> {
     return this.httpClient.get<Measure>(`${API_URL}measure/${id}`);
   }

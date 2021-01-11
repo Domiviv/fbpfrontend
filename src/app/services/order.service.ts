@@ -13,30 +13,36 @@ export class OrderService {
   constructor(private httpClient: HttpClient) {
   }
 
+  // Récupère la liste de toutes les commandes
   getAllOrders(): Observable<Order[]> {
     return this.httpClient.get<Order[]>(`${API_URL}order/all`);
   }
 
+  // Récupère la liste des commandes d'un client
   getOrdersByUserEmail(email: string): Observable<Order[]> {
     const params = new HttpParams().set('email', email);
     return this.httpClient.get<Order[]>(API_URL + 'order/user', {params});
   }
 
+  // Annule une commande
   cancelOrder(id: number): boolean {
     this.httpClient.put(API_URL + 'order/cancel/' + id, HTTP_OPTIONS).subscribe();
     return true;
   }
 
+  // Confirme le paiement d'une commande
   confirmPayment(id: number): boolean {
     this.httpClient.put(API_URL + 'order/confirm-payment/' + id, HTTP_OPTIONS).subscribe();
     return true;
   }
 
+  // Confirme la réception d'une commande
   confirmReceipt(id: number): boolean {
     this.httpClient.put(API_URL + 'order/confirm-receipt/' + id, HTTP_OPTIONS).subscribe();
     return true;
   }
 
+  // Ajoute une commande
   addOrder(idUser: number, stocks: Stock[]): void {
     this.httpClient.post<boolean>(API_URL + 'order/add?idUser=' + idUser, stocks, HTTP_OPTIONS).subscribe();
   }

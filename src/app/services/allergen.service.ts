@@ -13,10 +13,12 @@ export class AllergenService {
   constructor(private httpClient: HttpClient) {
   }
 
+  // Récupère la liste des allergènes
   getAllAllergens(): Observable<Allergen[]> {
     return this.httpClient.get<Allergen[]>(`${API_URL}allergen/all`);
   }
 
+  // Récupère un allergène sur base de son id
   getAllergenById(id: number): Observable<Allergen> {
     return this.httpClient.get<Allergen>(`${API_URL}allergen/${id}`);
   }

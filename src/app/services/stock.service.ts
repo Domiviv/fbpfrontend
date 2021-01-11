@@ -12,6 +12,7 @@ export class StockService {
   constructor(private httpClient: HttpClient) {
   }
 
+  // Vérifie si un produit existe dans le stock
   getStockByItemId(idItem: number): Observable<Stock> {
     return this.httpClient.get<Stock>(API_URL + 'stock/item/' + idItem);
   }

@@ -11,6 +11,7 @@ export class AuthenticationService {
   constructor(private httpClient: HttpClient) {
   }
 
+  // Connexion
   login(credentials): Observable<any> {
     return this.httpClient.post<any>(API_URL + 'authenticate', {
       username: credentials.value.email,
@@ -19,6 +20,7 @@ export class AuthenticationService {
 
   }
 
+  // Inscription (inutilisée)
   register(user): Observable<any> {
     return this.httpClient.post<any>(API_URL + 'register', {
       email: user.email,

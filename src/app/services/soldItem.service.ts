@@ -12,6 +12,7 @@ export class SoldItemService {
   constructor(private httpClient: HttpClient) {
   }
 
+  // Récupère la liste des produits vendus
   getAllSoldItems(): Observable<SoldItem[]> {
     return this.httpClient.get<SoldItem[]>(`${API_URL}sold-item/all`);
   }

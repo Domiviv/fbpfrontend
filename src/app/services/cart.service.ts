@@ -16,10 +16,12 @@ export class CartService {
   constructor() {
   }
 
+  // Supprime le panier
   public removeCart(): void {
     localStorage.clear();
   }
 
+  // Ajout un produit au panier du client
   public addToCart(stock: Stock, id: string): void {
     this.cart.stocks = [];
     if (this.getCart(id) !== null) {
@@ -36,10 +38,12 @@ export class CartService {
 
   }
 
+  // Récupère le panier du client
   public getCart(id: string): Stock[] {
     return JSON.parse(localStorage.getItem(id));
   }
 
+  // Vérifie si le produit existe dans le panier
   public ifExistInCart(idStock: number, idUser: string): boolean {
     this.cart.stocks = [];
     this.cart.stocks = this.getCart(idUser);
@@ -50,6 +54,7 @@ export class CartService {
     return false;
   }
 
+  // Supprime un produit du panier
   public removeFromCart(idStock: number, id: string): void {
     this.cart.stocks = [];
     this.cart.stocks = this.getCart(id);
