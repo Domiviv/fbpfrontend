@@ -27,7 +27,8 @@
       <div class="col-lg-4 col-md-6 mb-4"
            *ngFor="let item of items | filter:searchText | sortBy: 'asc':'label'; index as i">
         <div class="card h-100">
-          <img class="card-img-top" src="/assets/img/item{{item.idItem}}.jpg" alt="item{{item.idItem}}.jpg">
+          <img class="card-img-top" *ngIf="item.idItem >= 28" src="/assets/img/item1.jpg" alt="item{{item.idItem}}.jpg">
+          <img class="card-img-top" *ngIf="item.idItem < 28" src="/assets/img/item{{item.idItem}}.jpg" alt="item{{item.idItem}}.jpg">
           <div class="text-muted row justify-content-center" style="font-size: 0.7rem;">Image d'illustration non
             contractuelle. Via Pixabay
           </div>

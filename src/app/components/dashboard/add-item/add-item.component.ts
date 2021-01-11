@@ -85,7 +85,7 @@ export class AddItemComponent implements OnInit, OnDestroy {
     this.newItem.qt = this.addItemForm.value.qt;
     this.newItem.measure = this.addItemForm.value.measure;
     this.newItem.allergens = this.addItemForm.value.allergens;
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.newItem, null, 4));
+    // alert('SUCCESS!! :-)\n\n' + JSON.stringify(this.newItem, null, 4));
     console.log(this.addItemForm.value.allergens);
 
     this.itemSubscription = this.itemService.addItem(this.newItem).subscribe(
